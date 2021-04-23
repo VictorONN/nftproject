@@ -9,6 +9,8 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract adventureNFT is ERC721URIStorage {
+    IERC20 catnip;
+
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
@@ -19,22 +21,23 @@ contract adventureNFT is ERC721URIStorage {
     mapping(bytes32 => bool) public forSale;
     mapping(bytes32 => uint256) public uriToTokenId;
 
-    constructor(bytes32[] memory assetsForSale) ERC721("adventureNFT", "ANFT") {
+    constructor(bytes32[] memory assetsForSale, address catnipAddress)
+        ERC721("adventureNFT", "ANFT")
+    {
         _baseURI();
+        catnip = IERC20(catnipAddress);
         for (uint256 i = 0; i < assetsForSale.length; i++) {
             forSale[assetsForSale[i]] = true;
         }
     }
 
-function _baseURI() override internal view virtual returns (string memory) {
+    function _baseURI() internal view virtual override returns (string memory) {
         return "https://ipfs.io/ipfs/";
     }
-    function transferTokens(uint256 amount, address _nipToken)
-        public
-        returns (uint256)
-    {
+
+    function transferTokens(uint256 amount) public returns (uint256) {
         require(
-            IERC20(_nipToken).transferFrom(msg.sender, address(this), amount),
+            catnip.transferFrom(msg.sender, address(this), amount),
             "TRANSFER FAILED"
         );
         playerAmounts[msg.sender] += amount;

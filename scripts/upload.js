@@ -12,7 +12,7 @@ const main = async () => {
   let allAssets = {}
 
   console.log("\n\n Loading artwork.json...\n");
-  const artwork = JSON.parse(fs.readFileSync("../../artwork.json").toString())
+  const artwork = JSON.parse(fs.readFileSync('./artwork.json').toString())
 
   for(let a in artwork){
     console.log("  Uploading "+artwork[a].name+"...")
@@ -22,9 +22,9 @@ const main = async () => {
     allAssets[uploaded.path] = artwork[a]
   }
 
-  console.log("\n Injecting assets into the frontend...")
+  console.log("\n Creating file with all the uploaded hashes...")
   const finalAssetFile = "export default "+JSON.stringify(allAssets)+""
-  fs.writeFileSync("../react-app/src/assets.js",finalAssetFile)
+  // fs.writeFileSync("../react-app/src/assets.js",finalAssetFile)
   fs.writeFileSync("./uploaded.json",JSON.stringify(allAssets))
 
 

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "upload": "hardhat run scripts/upload.js",
+    "deploy": "hardhat run scripts/deploy.js"
   },
   "keywords": [],
   "author": "",
@@ -15,9 +17,11 @@
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.3",
-    "hardhat": "^2.2.0"
+    "hardhat": "^2.2.1"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.0.0"
+    "@openzeppelin/contracts": "^4.0.0",
+    "ipfs-http-client": "^49.0.4",
+    "ramda": "^0.27.1"
   }
 }
