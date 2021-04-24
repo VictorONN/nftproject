@@ -20,6 +20,7 @@
     "hardhat": "^2.2.1"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-etherscan": "^2.1.1",
     "@openzeppelin/contracts": "^4.0.0",
     "ipfs-http-client": "^49.0.4",
     "ramda": "^0.27.1"

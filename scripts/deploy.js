@@ -5,7 +5,7 @@ const { config, ethers, tenderly, run } = require("hardhat");
 const { utils } = require("ethers");
 const R = require("ramda");
 
-CATNIP_ADDRESS = "0xD3359F03a1DC49eb259404f6A970c076cd792170"
+CATNIP_ADDRESS = "0x923652030c5d3235862d9c5d8325D0b1a2f3DCe9"
 
 const main = async () => {
 
