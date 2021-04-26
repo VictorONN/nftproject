@@ -94,6 +94,13 @@ const main = async () => {
 
 // AdventureNFT address: 0xdf67E42656B4DC9d621834c0bccB17C93b42F26C
 
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+
 
 
 // const deploy = async (contractName, _args = [], overrides = {}, libraries = {}) => {
@@ -201,9 +208,9 @@ const main = async () => {
 //   }
 // }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+// main()
+//   .then(() => process.exit(0))
+//   .catch((error) => {
+//     console.error(error);
+//     process.exit(1);
+//   });
