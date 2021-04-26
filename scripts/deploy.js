@@ -92,6 +92,7 @@ const main = async () => {
   console.log(`AdventureNFT address: ${adventureNFT.address}`);
 };
 
+// AdventureNFT address: 0xdf67E42656B4DC9d621834c0bccB17C93b42F26C
 
 
 

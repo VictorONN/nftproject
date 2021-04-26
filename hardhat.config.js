@@ -17,7 +17,7 @@ module.exports = {
     },
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/87a7ae81404e427a8057a9b06ed26da1',
-      accounts: {mnemonic: 'horror bridge edit increase myth forum snake inject very note winner right'}
+      accounts: {mnemonic: ''}
     } 
   },
   solidity: {
