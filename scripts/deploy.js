@@ -81,25 +81,15 @@ const main = async () => {
     chalk.blue("artifacts"),
     "\n\n"
   );
-
-// async function main() {
+  
   const [deployer] = await ethers.getSigners();
   console.log(`Deploying contracts with the account: ${deployer.address}`);
   const balance = await deployer.getBalance();
   console.log(`Account balance: ${balance.toString()}`);
 
   const AdventureNFT = await ethers.getContractFactory('adventureNFT');
-  const adventureNFT = await AdventureNFT.deploy([ bytes32Array ], CATNIP_ADDRESS);
+  const adventureNFT = await AdventureNFT.deploy(bytes32Array , CATNIP_ADDRESS);
   console.log(`AdventureNFT address: ${adventureNFT.address}`);
-
-//   // const data = {
-//   //     address: token.address,
-//   //     abi: JSON.parse(token.interface.format('json'))
-//   // };
-//   // fs.writeFileSync('frontend/src/Token.json', JSON.stringify(data));
-
-// }
-
 };
 
 
