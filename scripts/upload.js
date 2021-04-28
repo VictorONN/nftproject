@@ -7,28 +7,43 @@ const R = require("ramda");
 const ipfsAPI = require('ipfs-http-client');
 const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
 
+// const main = async () => {
+
+//   let allAssets = {}
+
+//   console.log("\n\n Loading artwork.json...\n");
+//   const artwork = JSON.parse(fs.readFileSync('./artwork.json').toString())
+
+//   for(let a in artwork){
+//     console.log("  Uploading "+artwork[a].name+"...")
+//     const stringJSON = JSON.stringify(artwork[a])
+//     const uploaded = await ipfs.add(stringJSON)
+//     console.log("   "+artwork[a].name+" ipfs:",uploaded.path)
+//     allAssets.map(i => i.updateInfo = "ipfs://"+uploaded.path)
+//       // for(let i = 0; i < artwork.length; i++){
+//     //   allAssets[i] = Object.assign(data[i], updateKey);
+//     }
+//     // allAssets[uploaded.path] = artwork[a]
+//   }
+
+//   console.log("\n Creating file with all the uploaded hashes...")
+//   // const finalAssetFile = "export default "+JSON.stringify(allAssets)+""
+//   // fs.writeFileSync("../react-app/src/assets.js",finalAssetFile)
+//   fs.writeFileSync("./uploaded.json",JSON.stringify(allAssets))
+// // };
+
 const main = async () => {
-
-  let allAssets = {}
-
-  console.log("\n\n Loading artwork.json...\n");
   const artwork = JSON.parse(fs.readFileSync('./artwork.json').toString())
-
-  for(let a in artwork){
-    console.log("  Uploading "+artwork[a].name+"...")
-    const stringJSON = JSON.stringify(artwork[a])
-    const uploaded = await ipfs.add(stringJSON)
-    console.log("   "+artwork[a].name+" ipfs:",uploaded.path)
-    allAssets[uploaded.path] = artwork[a]
-  }
-
-  console.log("\n Creating file with all the uploaded hashes...")
-  const finalAssetFile = "export default "+JSON.stringify(allAssets)+""
-  // fs.writeFileSync("../react-app/src/assets.js",finalAssetFile)
-  fs.writeFileSync("./uploaded.json",JSON.stringify(allAssets))
-
-
-
+  const allAssets = await Promise.all(artwork.map(async item => {
+      const uploaded = await ipfs.add(JSON.stringify(item))
+      return {
+        ...item,
+        updateInfo: `ipfs://${uploaded.path}`
+      }
+    }
+  ))
+  fs.writeFileSync('./uploaded.json', JSON.stringify(allAssets))
+}
   /*
   //If you want to send value to an address from the deployer
   const deployerWallet = ethers.provider.getSigner()
@@ -55,7 +70,7 @@ const main = async () => {
   });
   */
 
-};
+// };
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
